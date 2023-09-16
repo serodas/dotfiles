@@ -1,0 +1,10 @@
+[user]
+	email = srodas@comfamiliar.com
+	name = Samir Rodas
+[alias]
+ st = status
+ c = !git add -A && git commit
+ reset-permissions = !git diff -p -R --no-color | grep -E \"^(diff|(old|new) mode)\" --color=newer | git apply
+ tree = log --graph --abbrev-commit --decorate --all
+[core]
+	excludesfile = /home/srodas/.gitignore_global
