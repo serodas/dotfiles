@@ -77,7 +77,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git docker zsh-autosuggestions zsh-syntax-highlighting symfony python npm yarn)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -116,3 +116,19 @@ if [ -z "$RUNNING" ]; then
     sudo dockerd > /dev/null 2>&1 &
     disown
 fi
+
+_display_message() {
+  dirtomove=$(ls -ad */ | fzf)
+  cd "$dirtomove"
+}
+
+zle -N _display_message
+bindkey '^h' _display_message
+
+_reverse_search() {
+  local selected_command=$(fc -rl 1 | awk '{$1="";print substr($0,2)}' | fzf)
+  LBUFFER=$selected_command
+}
+
+zle -N _reverse_search
+bindkey '^r' _reverse_search
